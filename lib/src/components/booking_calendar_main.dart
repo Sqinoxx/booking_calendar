@@ -41,7 +41,7 @@ class BookingCalendarMain extends StatefulWidget {
     this.locale,
     this.startingDayOfWeek,
     this.disabledDays,
-    this.onBookingIsLongPressed,
+    this.onBookingIsPressed,
   }) : super(key: key);
 
   final Stream<dynamic>? Function(
@@ -79,7 +79,7 @@ class BookingCalendarMain extends StatefulWidget {
   final bc.StartingDayOfWeek? startingDayOfWeek;
   final List<int>? disabledDays;
 
-  final Function? onBookingIsLongPressed;
+  final void Function(DateTime)? onBookingIsPressed;
 
   @override
   State<BookingCalendarMain> createState() => _BookingCalendarMainState();
@@ -186,7 +186,6 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                       onPageChanged: (focusedDay) {
                         _focusedDay = focusedDay;
                       },
-                      myOnDayLongPressed: widget.onBookingIsLongPressed,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -246,20 +245,31 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                           itemBuilder: (context, index) {
                             final slot =
                                 controller.allBookingSlots.elementAt(index);
-                            return BookingSlot(
-                              hideBreakSlot: widget.hideBreakTime,
-                              pauseSlotColor: widget.pauseSlotColor,
-                              availableSlotColor: widget.availableSlotColor,
-                              bookedSlotColor: widget.bookedSlotColor,
-                              selectedSlotColor: widget.selectedSlotColor,
-                              isPauseTime: controller.isSlotInPauseTime(slot),
-                              isBooked: controller.isSlotBooked(index),
-                              isSelected: index == controller.selectedSlot,
-                              onTap: () => controller.selectSlot(index),
-                              child: Center(
-                                child: Text(
-                                  widget.formatDateTime?.call(slot) ??
-                                      BookingUtil.formatDateTime(slot),
+                            return GestureDetector(
+                              onTap: () {
+                                print("tapped slot");
+                                if (controller.isSlotBooked(index)) {
+                                  //Blocked
+                                  if (widget.onBookingIsPressed != null) {
+                                    widget.onBookingIsPressed!(slot);
+                                  }
+                                }
+                              },
+                              child: BookingSlot(
+                                hideBreakSlot: widget.hideBreakTime,
+                                pauseSlotColor: widget.pauseSlotColor,
+                                availableSlotColor: widget.availableSlotColor,
+                                bookedSlotColor: widget.bookedSlotColor,
+                                selectedSlotColor: widget.selectedSlotColor,
+                                isPauseTime: controller.isSlotInPauseTime(slot),
+                                isBooked: controller.isSlotBooked(index),
+                                isSelected: index == controller.selectedSlot,
+                                onTap: () => controller.selectSlot(index),
+                                child: Center(
+                                  child: Text(
+                                    widget.formatDateTime?.call(slot) ??
+                                        BookingUtil.formatDateTime(slot),
+                                  ),
                                 ),
                               ),
                             );

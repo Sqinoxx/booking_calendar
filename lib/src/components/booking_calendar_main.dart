@@ -41,6 +41,7 @@ class BookingCalendarMain extends StatefulWidget {
     this.locale,
     this.startingDayOfWeek,
     this.disabledDays,
+    this.onBookingIsLongPressed,
   }) : super(key: key);
 
   final Stream<dynamic>? Function(
@@ -77,6 +78,8 @@ class BookingCalendarMain extends StatefulWidget {
   final String? locale;
   final bc.StartingDayOfWeek? startingDayOfWeek;
   final List<int>? disabledDays;
+
+  final Function? onBookingIsLongPressed;
 
   @override
   State<BookingCalendarMain> createState() => _BookingCalendarMainState();
@@ -183,6 +186,7 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                       onPageChanged: (focusedDay) {
                         _focusedDay = focusedDay;
                       },
+                      myOnDayLongPressed: widget.onBookingIsLongPressed,
                     ),
                   ),
                   const SizedBox(height: 8),

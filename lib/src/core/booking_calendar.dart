@@ -6,36 +6,37 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class BookingCalendar extends StatelessWidget {
-  const BookingCalendar(
-      {Key? key,
-      required this.bookingService,
-      required this.getBookingStream,
-      required this.uploadBooking,
-      required this.convertStreamResultToDateTimeRanges,
-      this.bookingExplanation,
-      this.bookingGridCrossAxisCount,
-      this.bookingGridChildAspectRatio,
-      this.formatDateTime,
-      this.bookingButtonText,
-      this.bookingButtonColor,
-      this.bookedSlotColor,
-      this.selectedSlotColor,
-      this.availableSlotColor,
-      this.bookedSlotText,
-      this.selectedSlotText,
-      this.availableSlotText,
-      this.gridScrollPhysics,
-      this.loadingWidget,
-      this.errorWidget,
-      this.uploadingWidget,
-      this.pauseSlotColor,
-      this.pauseSlotText,
-      this.pauseSlots,
-      this.hideBreakTime,
-      this.locale,
-      this.startingDayOfWeek = StartingDayOfWeek.monday,
-      this.disabledDays})
-      : super(key: key);
+  const BookingCalendar({
+    Key? key,
+    required this.bookingService,
+    required this.getBookingStream,
+    required this.uploadBooking,
+    required this.convertStreamResultToDateTimeRanges,
+    this.bookingExplanation,
+    this.bookingGridCrossAxisCount,
+    this.bookingGridChildAspectRatio,
+    this.formatDateTime,
+    this.bookingButtonText,
+    this.bookingButtonColor,
+    this.bookedSlotColor,
+    this.selectedSlotColor,
+    this.availableSlotColor,
+    this.bookedSlotText,
+    this.selectedSlotText,
+    this.availableSlotText,
+    this.gridScrollPhysics,
+    this.loadingWidget,
+    this.errorWidget,
+    this.uploadingWidget,
+    this.pauseSlotColor,
+    this.pauseSlotText,
+    this.pauseSlots,
+    this.hideBreakTime,
+    this.locale,
+    this.startingDayOfWeek = StartingDayOfWeek.monday,
+    this.disabledDays,
+    this.onBookingIsPressed,
+  }) : super(key: key);
 
   ///for the Calendar picker we use: [TableCalendar]
   ///credit: https://pub.dev/packages/table_calendar
@@ -126,6 +127,9 @@ class BookingCalendar extends StatelessWidget {
   ///if you pass a number which includes "Today" as well, the first and focused day in the calendar will be the first available day after today
   final List<int>? disabledDays;
 
+  //My Function
+  final void Function(DateTime)? onBookingIsPressed;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -159,6 +163,7 @@ class BookingCalendar extends StatelessWidget {
         locale: locale,
         startingDayOfWeek: startingDayOfWeek,
         disabledDays: disabledDays,
+        onBookingIsPressed: onBookingIsPressed,
       ),
     );
   }

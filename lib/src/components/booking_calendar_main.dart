@@ -42,6 +42,7 @@ class BookingCalendarMain extends StatefulWidget {
     this.startingDayOfWeek,
     this.disabledDays,
     this.onBookingIsPressed,
+    this.onDateTimeRangePressed,
   }) : super(key: key);
 
   final Stream<dynamic>? Function(
@@ -80,6 +81,8 @@ class BookingCalendarMain extends StatefulWidget {
   final List<int>? disabledDays;
 
   final void Function(DateTime)? onBookingIsPressed;
+
+  final void Function(DateTime)? onDateTimeRangePressed;
 
   @override
   State<BookingCalendarMain> createState() => _BookingCalendarMainState();
@@ -189,6 +192,14 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                     ),
                   ),
                   const SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (widget.onBookingIsPressed != null) {
+                        widget.onBookingIsPressed!(_selectedDay);
+                      }
+                    },
+                    child: Text("Pick Range"),
+                  ),
                   widget.bookingExplanation ??
                       Wrap(
                         alignment: WrapAlignment.spaceAround,

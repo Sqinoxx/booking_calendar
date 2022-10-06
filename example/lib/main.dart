@@ -97,6 +97,7 @@ class _BookingCalendarDemoAppState extends State<BookingCalendarDemoApp> {
               locale: 'hu_HU',
               startingDayOfWeek: StartingDayOfWeek.tuesday,
               disabledDays: const [6, 7],
+              onDateTimeRangePressed: (date) => print("ABC" + date.toString()),
             ),
           ),
         ));

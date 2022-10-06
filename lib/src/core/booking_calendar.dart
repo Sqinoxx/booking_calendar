@@ -36,6 +36,7 @@ class BookingCalendar extends StatelessWidget {
     this.startingDayOfWeek = StartingDayOfWeek.monday,
     this.disabledDays,
     this.onBookingIsPressed,
+    this.onDateTimeRangePressed,
   }) : super(key: key);
 
   ///for the Calendar picker we use: [TableCalendar]
@@ -129,6 +130,7 @@ class BookingCalendar extends StatelessWidget {
 
   //My Function
   final void Function(DateTime)? onBookingIsPressed;
+  final void Function(DateTime)? onDateTimeRangePressed;
 
   @override
   Widget build(BuildContext context) {

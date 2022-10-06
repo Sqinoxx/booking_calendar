@@ -194,8 +194,8 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                   const SizedBox(height: 8),
                   ElevatedButton(
                     onPressed: () {
-                      if (widget.onBookingIsPressed != null) {
-                        widget.onBookingIsPressed!(_selectedDay);
+                      if (widget.onDateTimeRangePressed != null) {
+                        widget.onDateTimeRangePressed!(_selectedDay);
                       }
                     },
                     child: Text("Pick Range"),

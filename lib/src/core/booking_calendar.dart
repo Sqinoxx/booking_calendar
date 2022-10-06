@@ -166,6 +166,7 @@ class BookingCalendar extends StatelessWidget {
         startingDayOfWeek: startingDayOfWeek,
         disabledDays: disabledDays,
         onBookingIsPressed: onBookingIsPressed,
+        onDateTimeRangePressed: onDateTimeRangePressed,
       ),
     );
   }
